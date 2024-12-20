@@ -6,7 +6,7 @@ The tool allows users to set various parameters.
 
 Please refer to the left panel of the GUI shown below.
 
-<img src="images/mainGUI.jpg" alt="The main GUI." width="1200" />
+<img src="images/mainGUI.jpg" alt="The main GUI." width="900" />
 
 1. **LFO freqs**: This parameter specifies the frequency range of the low-frequency phase. It consists of a pair of numbers in increasing order, indicating the -6db cutoff point. The band-pass filter used is a Hamming window FIR (-53dB/oct). The transition bandwidth for the low-freq phase is determined by min([lower edge of the low-freq]*2 [bandwidth of the low-freq range]). Similarly, that for the high-freq phase is determined by min([lower edge of the high-freq band]*0.1 [bandwidth of the high-freq range]).
 2. **HFO freqs**: This parameter defines the the frequency range of the high-frequency amplitude. It is important to note that the lower edge of the high-freq range must belarger than (mean of the low-freq range) + (bandwidth of the low-freq range) + (bandwidth of the high-freq range)
@@ -61,3 +61,8 @@ Note that the purple line (PAC Absent) has a variance that is 10 times larger th
 ## Conclusion and comments
 1.The overall winner is robustGLM. It is also fast, unlike normalized MI.
 2.Internally, all three variants of GLM studied by Oezkurt and Schnitzler (2011) are calculated. However, unless the pair of input vectors, PAC Present and PAC Absent, are exactly normalized to the same variance, standard GLM or equivalent-to-GLM keep failing. Even when PAC Present and PAC Absent are normalized as a whole data, the subsampled windows have local deviation from the overall variance, thus these GLM variants fail. When the inputs time series of PAC Present and Absent are exactly normalized, the results are identical to that of robust GLM. From here, we can learn what it means by excluding the intercept term i.e. beta_coeff(3) from the equasion.
+
+## Update (12/19/2024) ##
+1. Statistics added. p-values and Cohen's d from two-sample t-tests are shown.
+2. Low frequency for phase is now specified with a single frequency bin. This is based on the original Oezgurt and Schinitzler (2011).
+<img src="images/update001.jpg" alt="The main GUI." width="900" />
